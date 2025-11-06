@@ -1,22 +1,23 @@
 # check=skip=SecretsUsedInArgOrEnv
-# Imagen base oficial de n8n
+# Dockerfile para Render
 FROM n8nio/n8n:latest
 
-# Configuración de autenticación básica
+
 ENV N8N_BASIC_AUTH_ACTIVE=true
 ENV N8N_BASIC_AUTH_USER=user
 ENV N8N_BASIC_AUTH_PASSWORD=password
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-# Configuración de base de datos
+
 ENV DB_TYPE=postgresdb
 ENV DB_POSTGRESDB_DATABASE=n8n
-ENV DB_POSTGRESDB_HOST=postgres
+ENV DB_POSTGRESDB_HOST=<RENDER_POSTGRES_HOST>
 ENV DB_POSTGRESDB_PORT=5432
-ENV DB_POSTGRESDB_USER=n8n
-ENV DB_POSTGRESDB_PASSWORD=n8n_password
+ENV DB_POSTGRESDB_USER=<RENDER_POSTGRES_USER>
+ENV DB_POSTGRESDB_PASSWORD=<RENDER_POSTGRES_PASSWORD>
 
 # Puerto que usa n8n
 EXPOSE 5678
 
-# Comando de inicio
+# Comando de inicio (opcional, la imagen ya lo tiene)
 CMD ["n8n", "start"]
